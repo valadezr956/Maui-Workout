@@ -3,12 +3,16 @@
     x:Class="WorkoutApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:WorkoutApp"
+    xmlns:page="clr-namespace:WorkoutApp.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar Route="workout">
+        <Tab Icon="home.png" Route="MainPage">
+            <ShellContent ContentTemplate="{DataTemplate page:HomePage}" />
+        </Tab>
+        <Tab Icon="history.png" Route="History">
+            <ShellContent ContentTemplate="{DataTemplate page:HistoryPage}" />
+        </Tab>
+    </TabBar>
 
 </Shell>
