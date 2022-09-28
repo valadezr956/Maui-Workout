@@ -1,20 +1,20 @@
 namespace WorkoutApp.Services;
-public class SetService
+public class ProductService
 {
-    static SetService _instance;
-    public static SetService Instance
+    static ProductService _instance;
+    public static ProductService Instance
     {
         get
         {
-            _instance = new SetService();
+            _instance = new ProductService();
             return _instance;
         }
     }
-    public List<Set> GetProducts()
+    public List<Product> GetProducts()
     {
-        return new List<Set> 
+        return new List<Product> 
         { 
-            new Set()
+            new Product()
             {
                 ProductId=1010, 
                 ProductType="Coffee",
@@ -27,7 +27,7 @@ public class SetService
                 ProductSizeType="Tall",
                 ProductDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at mi vitae augue feugiat scelerisque in a eros."
             },
-            new Set()
+            new Product()
             {
                 ProductId=1011,
                 ProductType="Tea",

@@ -1,7 +1,9 @@
+using System.ComponentModel;
+
 namespace WorkoutApp.Models;
 
 [INotifyPropertyChanged]
-public partial class Set
+public partial class Product
 {
     [ObservableProperty]
     public int productId;
@@ -26,16 +28,17 @@ public partial class Set
     {
         ProductIsFav = !ProductIsFav;
     }
+    [ObservableProperty]
     public string productSizeType;
-    partial void OnProductSizeTypeChanged(string value)
-    {
-        if (value.Equals("Grande"))
-            ProductPrice = ProductBasePrice + 20.00;
-        else if (value.Equals("Venti"))
-            ProductPrice = ProductBasePrice + 50.00;
-        else
-            ProductPrice = ProductBasePrice;
-    }
+    //partial void OnProductSizeTypeChanged(string value)
+    //{
+    //    if (value.Equals("Grande"))
+    //        ProductPrice = ProductBasePrice + 20.00;
+    //    else if (value.Equals("Venti"))
+    //        ProductPrice = ProductBasePrice + 50.00;
+    //    else
+    //        ProductPrice = ProductBasePrice;
+    //}
 }
 
 [INotifyPropertyChanged]

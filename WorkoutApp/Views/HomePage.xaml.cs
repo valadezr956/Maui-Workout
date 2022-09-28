@@ -6,4 +6,7 @@ public partial class HomePage : ContentPage
 	{
 		InitializeComponent();
 	}
+    private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+    {
+    }
 }
