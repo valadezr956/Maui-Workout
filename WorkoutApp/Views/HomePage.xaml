@@ -4,37 +4,104 @@
              x:Class="WorkoutApp.Views.HomePage"
              Title="HomePage">
 
-        <ScrollView>
-        <VerticalStackLayout 
-            Spacing="25" 
-            Padding="30,0" 
-            VerticalOptions="Center">
+    <ScrollView>
+           <StackLayout Orientation="Horizontal" 
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="Start"
+                                     Margin="0,20,0,0">
+                            <Label Text="Popular"
+                                   HorizontalOptions="StartAndExpand"
+                                   FontFamily="RalewayMedium"
+                                   FontSize="22"
+                                   TextColor="Black"/>
+                            <Label Text="See All"
+                                   HorizontalOptions="End"
+                                   FontFamily="RalewayMedium"
+                                   FontSize="22"
+                                   TextColor="{StaticResource Primary}"/>
+                        </StackLayout>
+                        <!---Products Collection View-->
+                        <CollectionView ItemsSource="{Binding Products}"
+                                        SelectionMode="None"
+                                        VerticalOptions="StartAndExpand"
+                                        Margin="-10,0,0,0">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <VerticalStackLayout>
+                                        <Border Padding="0"
+                                    Margin="15,10,5,5"
+                                    WidthRequest="240"
+                                    BackgroundColor="{StaticResource Tertiary}"
+                                    Stroke="Gray"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 15">
+                                            <Border.Shadow>
+                                                
+                                                <OnPlatform x:TypeArguments="Shadow">
+                                                    <On Platform="Android, WinUI">
+                                                        <Shadow Radius="25" Opacity="0.2"></Shadow>
+                                                    </On>
+                                                    <On Platform="iOS,MacCatalyst">
+                                                        <Shadow Radius="5" Opacity="0.2"></Shadow>
+                                                    </On>
+                                                </OnPlatform>
+                                            </Border.Shadow>
+                                            <Grid RowDefinitions="Auto,Auto,Auto">
+                                                <Border Grid.Row="0" StrokeThickness="0"
+                                            BackgroundColor="{Binding ProductImgBackground}"
+                                            Padding="0,40"
+                                            Margin="-1">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="15"/>
+                                                    </Border.StrokeShape>
+                                                    <Image Source="{Binding ProductImgUrl}"
+                                               Aspect="AspectFit"
+                                               HeightRequest="180"/>
+                                                </Border>
+                                                <Label Grid.Row="1" 
+                                           HorizontalOptions="FillAndExpand"
+                                           Text="{Binding ProductName}"
+                                           FontFamily="RalewayMedium"
+                                           FontSize="19"
+                                           TextColor="Black"
+                                           LineBreakMode="NoWrap"
+                                           Margin="10,10,10,10"/>
+                                                <StackLayout Grid.Row="2" Orientation="Horizontal"
+                                                 Margin="10,0,10,15">
+                                                    <Label Text="{Binding ProductPrice, StringFormat='${0}.00'}"
+                                               FontSize="25"
+                                               FontFamily="PoppinsRegular"
+                                               TextColor="{StaticResource Primary}"
+                                               HorizontalOptions="StartAndExpand"/>
+                                                    <ImageButton HorizontalOptions="End"
+                                                     Source="love_filled.png" 
+                                                     Padding="5"
+                                                     Command="{Binding ProductFavCommand}" CommandParameter="{Binding .}">
+                                                        <ImageButton.Triggers>
+                                                            <DataTrigger TargetType="ImageButton" 
+                                                             Binding="{Binding ProductIsFav}" Value="True">
+                                                                <Setter Property="Source" Value="love_filled.png"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="ImageButton" 
+                                                             Binding="{Binding ProductIsFav}" Value="False">
+                                                                <Setter Property="Source" Value="love_default.png"/>
+                                                            </DataTrigger>
+                                                        </ImageButton.Triggers>
+                                                    </ImageButton>
+                                                </StackLayout>
+                                            </Grid>
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference HomeView}}" CommandParameter="{Binding .}"/>
+                                            </Border.GestureRecognizers>
+                                        </Border>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-                
-            <Label 
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-            
-            <Label 
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+                                    </VerticalStackLayout>
 
-            <Button 
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
     </ScrollView>
 </ContentPage>
